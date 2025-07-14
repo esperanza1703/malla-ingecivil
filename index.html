@@ -1,27 +1,27 @@
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Malla Curricular - Ingeniería Civil (CIVI25P2)</title>
+  <meta charset="UTF-8">
+  <title>Malla Curricular - Ingeniería Civil</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 20px;
+      margin: 20px;
+      background-color: #f5f5f5;
     }
-    h1, h2 {
+    h1 {
       text-align: center;
+      color: #2c3e50;
     }
     details {
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
       padding: 10px;
-      background: white;
     }
     summary {
       font-weight: bold;
-      font-size: 18px;
+      font-size: 1.2em;
       cursor: pointer;
     }
     table {
@@ -30,21 +30,58 @@
       margin-top: 10px;
     }
     th, td {
-      border: 1px solid #aaa;
+      border: 1px solid #ddd;
       padding: 8px;
       text-align: left;
     }
     th {
-      background-color: #004080;
-      color: white;
+      background-color: #ecf0f1;
     }
-    .aprobado { background-color: #d4edda; }
-    .convalidado { background-color: #fff3cd; }
-    .en-curso { background-color: #d1ecf1; }
-    .pendiente { background-color: #f8d7da; }
+    tr.aprobado {
+      background-color: #d4edda;
+    }
+    tr.convalidado {
+      background-color: #d0e7f9;
+    }
+    tr.en-curso {
+      background-color: #fff3cd;
+    }
+    tr.pendiente {
+      background-color: #f8d7da;
+    }
+    tr.tachado td {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
   </style>
 </head>
 <body>
+  <h1>Malla Curricular Interactiva</h1>
+  <p>Haz clic sobre un curso para tacharlo. Los colores indican el estado:</p>
+  <ul>
+    <li><span style="background:#d4edda;padding:2px 6px;">Aprobado</span></li>
+    <li><span style="background:#d0e7f9;padding:2px 6px;">Convalidado</span></li>
+    <li><span style="background:#fff3cd;padding:2px 6px;">En curso</span></li>
+    <li><span style="background:#f8d7da;padding:2px 6px;">Pendiente</span></li>
+  </ul>
+   <script>
+    // Hacer interactivo: tachar cursos al hacer clic y guardar en localStorage
+    document.querySelectorAll("tbody tr").forEach((row, i) => {
+      const key = `curso-${i}`;
+      // Restaurar estado
+      if (localStorage.getItem(key) === "true") {
+        row.classList.add("tachado");
+      }
+      // Escuchar clic
+      row.addEventListener("click", () => {
+        row.classList.toggle("tachado");
+        localStorage.setItem(key, row.classList.contains("tachado"));
+      });
+    });
+  </script>
+</body>
+</html>
+
   <h1>Malla Curricular</h1>
   <h2>Ingeniería Civil - CIVI25P2</h2>
   <p><strong>Estudiante:</strong> Mamani Quispe, Maria Esperanza</p>
